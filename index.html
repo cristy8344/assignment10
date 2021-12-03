@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+	<title>dogFacts API</title>
+	<meta charset="utf-8"/>
+	<script>
+		function getDogFact() {
+
+			request = new XMLHttpRequest();
+
+		 	request.open("GET", "https://dog-facts-api.herokuapp.com/api/v1/resources/dogs/all", true);
+
+			 request.onreadystatechange = function() {
+					if (request.readyState == 4 && request.status == 200) {
+
+						var result = request.responseText;
+						document.getElementById("facts").innerHTML = result;
+						//alert(result);
+						fact = JSON.parse(result);
+					
+						document.getElementById("facts").innerHTML = "dog fact!!!   &nbsp;" + fact[0]["text"] + " <br>" + "dog fact2!!!! &nbsp;" + fact[1]["text"];
+
+					}
+
+				}
+				request.send();
+			}
+		
+		
+	
+		
+	</script>
+</head>
+
+
+<body onload="getDogFact()">
+
+  <h1> Enjoy this dog fact!</h1>
+	<div id="facts"> &nbsp; </div>
+
+	<div>
+		
+		<ul>
+		  <li>
+			I chose this API because I felt it was an interesting dog fact of the day and, well, I just appreciate dogs in general. <br>
+		  </li>
+		  <li>
+			I found the API through a random google search, https://awesomeopensource.com/project/DukeNgn/Dog-facts-API?categoryPage=1, 
+			and the API data can be found here https://dog-facts-api.herokuapp.com/api/v1/resources/dogs/all <br>
+		  </li>
+		  <li>
+			I used new XMLHttpRequest() to access this data, which allowed me to use open()
+			to request the data from the server (it returns a JSON string).
+			I then implement an event handler to display the data when the data was ready.
+			I parsed the JSON string back into an object and accessed the "text" field.
+		  </li>
+		  <li>
+			This API updates randomly, so it could be used on a common franchise like Petcos' or PetSmarts' website to generate the animal they cater to.It could also be used on a positive message to include various types of breeds.
+		  </li>
+		</ul>
+		
+	</div>
+</body>
+</html>
